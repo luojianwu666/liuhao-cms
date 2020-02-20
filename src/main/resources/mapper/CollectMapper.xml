@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuhao.cms.dao.CollectDao">
+
+	<!--查询每个用户的收藏夹  -->
+	<select id="selectByUserId" resultType="Collect">
+	SELECT * from cms_collect where user_id = #{collect.userId}	order by created desc
+	</select>
+	
+	<!-- 用户进行收藏功能 -->
+	<insert id="insert">
+		INSERT INTO `cms_1709d`.`cms_collect` 
+		(`text`, `url`, `created`, `user_id`) 
+		VALUES 
+		(#{collect.text}, #{collect.url}, #{collect.created}, #{collect.userId});
+
+	</insert>
+	
+	
+   <!-- 用户进行删除收藏功能 -->
+	<delete id="deleteById">
+		delete from cms_collect where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from cms_comment where id in(${ids})
+	</delete>
+</mapper>

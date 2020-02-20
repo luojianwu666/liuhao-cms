@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuhao.cms.dao.LinksDao">
+	<select id="select" resultType="Links">
+		select * from cms_links
+		<where>
+			<if test="links.text!=null and links.text!=''">
+				text like '%${links.text}%'
+			</if>
+		</where>
+	</select>
+	<select id="selectById" resultType="Links">
+		select * from cms_links where id = #{id}
+	</select>
+	
+	<update id="update">
+	UPDATE `cms_1709d`.`cms_links` SET `text`=#{links.text}, `url`=#{links.url}  WHERE `id`=#{links.id}
+	</update>
+	
+	<insert id="insert">
+	INSERT INTO `cms_1709d`.`cms_links` (`id`, `text`, `url`, `created`) VALUES (null, #{links.text},
+	 #{links.url},#{links.created})
+	</insert>
+	
+	<delete id="deleteByIds">
+	  delete from cms_links where id in (${ids})
+	</delete>
+</mapper>
